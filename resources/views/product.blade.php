@@ -22,12 +22,21 @@
                 @foreach($category as $value)
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="type" id="type{{ $value->id }}"
-                            value="{{ $value->id }}">
+                            {{request()->get('type') == $value->id  ? 'checked' : ''}}
+                        value="{{ $value->id }}">
+
                         <label class="form-check-label" for="type{{ $value->id }}">
                             {{ $value->name }}
                         </label>
                     </div>
                 @endforeach
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="type" id="type"
+                        value="all">
+                    <label class="form-check-label" for="type">
+                        all
+                    </label>
+                </div>
             </div>
             {{-- <div class="form-check">
                 <input class="form-check-input" type="hidden" name="status" value="encour">

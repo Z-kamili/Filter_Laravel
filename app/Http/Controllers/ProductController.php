@@ -49,7 +49,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        dd('hi');
+
     }
 
     /**
@@ -92,8 +92,16 @@ class ProductController extends Controller
 
     public function filter(Request $request)
     {
-        $products = Product::where('category_id',$request->type)->get();
-        $category = category::get();
+        if($request->type == 'all')
+        {
+            $products = Product::with('category')->get();
+            $category = category::get();
+        }else 
+        {
+            $products = Product::where('category_id',$request->type)->get();
+            $category = category::get();
+        }
+
         return view('product',compact(['products','category']));
     }
 }
